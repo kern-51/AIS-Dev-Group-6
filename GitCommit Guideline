@@ -1,0 +1,48 @@
+Kern finds all the organising and naming and workflow confusing so he has turned to his best friend "ChatGPT"-kun and created a 'brief'(subjective) guideline 
+
+1. Branching
+  To keep our main codebase stable, never commit directly to the main (or master) branch. 
+  Always create a new branch for your work. (code/updates)
+
+  Branch Naming Convention
+    Name your branches clearly so everyone knows what you are working on:
+      feature/feature-name (e.g., feature/user-login)
+      bugfix/issue-name (e.g., bugfix/broken-submit-button)
+      docs/topic (e.g., docs/update-readme
+
+2. The Git Workflow
+  - Sync your local machine
+  - Create Branch
+  - Track your changes consistently 
+    (Best not to wait until the end of the week to commit. Commit small, logical chunks of work frequently is the best practice.)
+  - Push to the repository
+  - Open a Pull Request  
+    (Once feature is ready, open a PR to merge it into main. Ask at least one teammate for a code review/let team know, if we are in a rush.)
+
+3. Commit Message Guidelines
+  Your commit messages should follow this format: type: brief description of change
+  Common Types:
+    feat: A new feature (e.g., feat: add password reset option)
+    fix: A bug fix (e.g., fix: resolve crash on mobile layout)
+    docs: Documentation changes only (e.g., docs: update setup instructions)
+    style: Changes that do not affect the meaning of the code (white-space, formatting, etc.)
+    refactor: A code change that neither fixes a bug nor adds a feature (improving code structure)
+
+  Good Example: feat: add email verification to signup page
+  Bad Example: fix: fixed some stuff or working code
+
+4. Code Quality Standards
+  - Readability
+    Intentional Naming: Variable and function names should explain what they do. (Use isUserLoggedIn instead of flag).
+    Formatting: Use consistent indentation and spacing.
+    Comments: Write comments to explain why something was done a certain way, not what the code does (the code itself should be clear enough to explain the what).
+
+  - Reusability
+    Don't Repeat Yourself (DRY): If you find yourself copying and pasting the same code blocks in multiple places, extract that code into a separate, reusable function or component.
+    Single Responsibility: A FUNCTION should do one thing and do it well.
+
+  - Configurability
+    No Hardcoding: Never hardcode values that might change (like API URLs, secret keys, or specific timeout thresholds).
+    Use Configuration Files: Pull these values into environment variables (.env) or a central configuration file. This allows our app to run smoothly across different environments (Development, Testing, Production).
+
+
