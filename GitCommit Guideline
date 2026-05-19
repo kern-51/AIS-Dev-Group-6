@@ -4,6 +4,15 @@ Kern finds all the organising and naming and workflow confusing so he has turned
   To keep our main codebase stable, never commit directly to the main (or master) branch. 
   Always create a new branch for your work. (code/updates)
 
+  Branch by feature, not by fileFiles are interconnected:
+  If you modify a function in utils.py that is called by main.py, separating them into two different branches will break your code. 
+  They need to be updated together in the same branch.
+
+  Easier Testing: 
+    Branching by feature ensures your entire application works as a cohesive unit before you merge it into your main project.
+  Less Merge Chaos: 
+    Managing dozens of file-based branches leads to "merge conflicts," where Git gets confused about which version of the project is correct.
+
   Branch Naming Convention
     Name your branches clearly so everyone knows what you are working on:
       feature/feature-name (e.g., feature/user-login)
