@@ -11,6 +11,13 @@ def data_clean(df):
         mapping = {val: idx + 1 for idx, val in enumerate(unique_values)}  # starts at 1
         # Apply mapping
         df_standard[col] = df_standard[col].map(mapping)
+
+    df_standard = df_standard[
+    df_standard['Temperature'].between(-10, 60) &
+    df_standard['Humidity'].between(0, 100) &
+    (df_standard['CO2_InfraredSensor'] >= 0) &
+    (df_standard['CO2_ElectroChemicalSensor'] >= 0)]
+    
     df_standard['Ambient Light Level'] = df_standard.groupby('Time of Day')['Ambient Light Level'].transform(lambda x: x.fillna(x.median()))
    
     numeric_df = df_standard.select_dtypes(include=['number'])
