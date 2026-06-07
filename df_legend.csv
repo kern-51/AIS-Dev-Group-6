@@ -1,0 +1,19 @@
+Column,Original_Value,Encoded_Value
+Time of Day,morning,1
+Time of Day,afternoon,2
+Time of Day,evening,3
+Time of Day,night,4
+HVAC Operation Mode,cooling_active,1
+HVAC Operation Mode,eco_mode,2
+HVAC Operation Mode,heating_active,3
+HVAC Operation Mode,maintenance_mode,4
+HVAC Operation Mode,off,5
+HVAC Operation Mode,ventilation_only,6
+Ambient Light Level,very_dim,1
+Ambient Light Level,dim,2
+Ambient Light Level,moderate,3
+Ambient Light Level,bright,4
+Ambient Light Level,very_bright,5
+Activity Level,LowActivity,1
+Activity Level,ModerateActivity,2
+Activity Level,HighActivity,3
