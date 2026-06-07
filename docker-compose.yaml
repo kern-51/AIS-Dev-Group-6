@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  ml-pipeline:
+    # Build the image using the Dockerfile in the current directory
+    build: .
+    container_name: ml_pipeline_container
+    
+    # Map your local project folders to the container. 
+    # This creates a "bridge" between your computer and the container.
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./project_data:/app/project_data
+      
+    # Ensures Python can find your 'src' folder regardless of which script is running
+    environment:
+      - PYTHONPATH=/app
+    
+    # 'no' ensures the container stops after the run.sh script completes its work
+    restart: "no"
