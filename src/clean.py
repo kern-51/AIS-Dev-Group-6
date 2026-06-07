@@ -11,23 +11,48 @@ def data_clean(df):
   
     string_cols = df_standard.select_dtypes(include=['object', 'category']).columns  
   
+    custom_orders = {
+    'Time of Day': ['morning', 'afternoon', 'evening', 'night'],
+    'Activity Level': ['LowActivity','ModerateActivity','HighActivity'],
+    'Ambient Light Level': ['very_dim','dim','moderate','bright','very_bright']
+    }
+    
+    legend_data = []
+    
     for col in string_cols:
-        unique_values = sorted(df_standard[col].dropna().unique())
-        mapping = {val: idx + 1 for idx, val in enumerate(unique_values)}  # starts at 1
-        # Apply mapping
+        if col in custom_orders:
+            ordered_vals = custom_orders[col]
+            # Ensure all existing values are in the order list (or handle missing)
+            mapping = {val: idx+1 for idx, val in enumerate(ordered_vals)}
+        else:
+            # Fallback to alphabetical
+            unique_values = sorted(df_standard[col].dropna().unique())
+            mapping = {val: idx+1 for idx, val in enumerate(unique_values)}
+        
         df_standard[col] = df_standard[col].map(mapping)
+        
+        for val, code in mapping.items():
+            legend_data.append({
+                "Column": col,
+                "Original_Value": val,
+                "Encoded_Value": code
+            })
 
-    df_standard = df_standard[
-    df_standard['Temperature'].between(-10, 60) &
-    df_standard['Humidity'].between(0, 100) &
-    (df_standard['CO2_InfraredSensor'] >= 0) &
-    (df_standard['CO2_ElectroChemicalSensor'] >= 0)]
+    mask_humidity_bad = ~df_standard['Humidity'].between(0, 100)
+    mask_co2_bad = df_standard['CO2_InfraredSensor'] < 0
+    mask_combined = mask_humidity_bad | mask_co2_bad
+    
+    # DataFrame with only the rows you want to keep
+    df_before = df_standard
+    df_standard = df_standard[~mask_combined].copy()
+    df_standard.loc[df_standard['Temperature'] > 100, 'Temperature']*=0.1
+    
     
     df_standard['Ambient Light Level'] = df_standard.groupby('Time of Day')['Ambient Light Level'].transform(lambda x: x.fillna(x.median()))
    
     numeric_df = df_standard.select_dtypes(include=['number'])
 
-
+    #KNN
     features = [
         'Temperature',
         'Humidity',
@@ -44,20 +69,24 @@ def data_clean(df):
     df_standard[features] = imputer.fit_transform(
         df_standard[features]
     )
-
-
-    #  Grab ALL numerical columns together so KNN can see the relationships
-    numeric_cols = df_standard.select_dtypes(include=["number"]).columns
-    # Scale all numerical columns at once
-    scaler = MinMaxScaler()
-    scaled_data = scaler.fit_transform(df_standard[numeric_cols])
-    # Impute all columns together
-    # (KNN will now use Temperature, Humidity, etc., to find the perfect match!)
-    imputer = KNNImputer(n_neighbors=7)
-    imputed_scaled = imputer.fit_transform(scaled_data)
-    # Inverse scale everything back to their original ranges
-    imputed_original = scaler.inverse_transform(imputed_scaled)
-    # Overwrite the original columns with the completely filled-in data
-    df_standard[numeric_cols] = imputed_original
+    
+    #KNN for CO_GasSensor
+    features = [
+        'Temperature',
+        'Humidity',
+        'CO2_InfraredSensor',
+        'CO2_ElectroChemicalSensor',
+        'MetalOxideSensor_Unit1',
+        'MetalOxideSensor_Unit2',
+        'MetalOxideSensor_Unit3',
+        'MetalOxideSensor_Unit4',
+        'CO_GasSensor'
+    ]
+    
+    imputer = KNNImputer(n_neighbors=1)
+    
+    df_standard[features] = imputer.fit_transform(
+        df_standard[features]
+    )
     
     return df_clean
