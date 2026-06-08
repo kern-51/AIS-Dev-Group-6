@@ -1,9 +1,14 @@
+import pandas as pd
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score
-def train_logistic_regression(df, target_column="Activity Level"):
+def train_gradient_boosting(df):
+  """
+  Builds a gradient boosting model using data from the pipeline, 
+  and returns the evaluation metrics the model on training and testing datasets.
+  """
   X = df.drop('Activity Level', axis=1) 
-  y = df['Activity Level'] 
+  y = df['Activity Level']
   #
   # split data for training and testing
   #
@@ -12,7 +17,7 @@ def train_logistic_regression(df, target_column="Activity Level"):
 
   target_names = ['1.0', '2.0', '3.0']
 
-  model = LogisticRegression(penalty="l2", random_state=16, max_iter=1000, solver="newton-cholesky")
+  model = GradientBoostingClassifier(n_estimators=1000, learning_rate=0.01, random_state=42)
   model.fit(X_train, y_train)
   y_pred = model.predict(X_test)
 
