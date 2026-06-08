@@ -128,9 +128,9 @@ def isolated_forest_eval(df, top_k=50):
         print(f"Flag Jaccard ({rs1}, {rs2}) = {jaccard:.3f}")
         
     avg_topk_jaccard = np.mean(topk_scores)
-    avg_flag_jaccard = np.mean(flag_scores)
+    avg_flag_jaccard = np.mean(flag_scores) 
     
     return {
-        "avg_topk_jaccard": avg_topk_jaccard,
-        "avg_flag_jaccard": avg_flag_jaccard
+        "avg_topk_jaccard": avg_topk_jaccard,#How consistent the top 50 most anomalous scores are across different random seeds
+        "avg_flag_jaccard": avg_flag_jaccard #How consistent the hard -1 flagged anomalies are across different random seeds
     }
