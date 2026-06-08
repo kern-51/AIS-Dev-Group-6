@@ -1,7 +1,6 @@
 # 1. Start with Python
 FROM python:3.10-slim
 
-ENV PYTHONUNBUFFERED=1
 
 # 2. Set the work directory
 WORKDIR /app

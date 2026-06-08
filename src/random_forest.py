@@ -3,7 +3,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 
 def train_random_forest(df, target_column="Activity Level"):
-
+    """
+    Taken the ingested data from the pipeline, built a random forest model using data to predict
+    activity level.  Output is the evauluation such as the accuracy, recall, precision and F1 score.
+    This is done to see how well the model performs with the data. Summary is that it splits
+    the data, trains the model and predicts and evaluates the results.
+    """
     X = df.drop(columns=[target_column])
     y = df[target_column]
 

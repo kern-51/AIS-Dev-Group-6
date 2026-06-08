@@ -6,10 +6,7 @@ services:
     build: .
     container_name: ml_pipeline_container
 
-    stdin_open: true # Equivalent to the -i flag
-    tty: true        # Equivalent to the -t flag
     environment:
-      - PYTHONUNBUFFERED=1
       - PYTHONPATH=/app
     # Ensures Python can find your 'src' folder regardless of which script is running
 

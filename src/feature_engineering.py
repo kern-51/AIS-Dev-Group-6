@@ -1,6 +1,14 @@
 import pandas as pd
 
 def engineer_features(df):
+    """
+    Clean the Activity level column to ensure it is ready for feature engineering. Ensure 
+    standardisation of inconsistent labels so that different class names arent treated
+    differently. Proceed to creating different data columns using existing ones. Remove session
+    ID, not useful as it is just an identifier and not good for predicting activity level. Summary is
+    that this file creates better feature inputs from the original sensor data so that the model
+    has more meaningful information to learn from.
+    """
     df = df.copy()
 
     if "Activity Level" in df.columns:
