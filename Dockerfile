@@ -1,8 +1,12 @@
 # 1. Start with Python
-FROM python:3.9-slim
+FROM python:3.10-slim
+
+ENV PYTHONUNBUFFERED=1
 
 # 2. Set the work directory
 WORKDIR /app
+
+RUN pip install --upgrade pip
 
 # 3. Download libraries
 COPY requirements.txt .
@@ -15,4 +19,4 @@ COPY . .
 RUN chmod +x run.sh
 
 # 6. Tell Docker what to do when it starts
-CMD ["./run.sh"]
+CMD ["bash", "run.sh"]

@@ -41,14 +41,4 @@ def engineer_features(df):
     if "Session ID" in df.columns:
         df.drop(columns=["Session ID"], inplace=True)
 
-    df = pd.get_dummies(
-        df,
-        columns=[
-            "Time of Day",
-            "HVAC Operation Mode",
-            "Ambient Light Level"
-        ],
-        drop_first=True
-    )
-
     return df

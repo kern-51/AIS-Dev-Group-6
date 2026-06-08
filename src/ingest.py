@@ -1,5 +1,6 @@
-
-def data_ingest(con, query):
+import sqlite3
+import pandas as pd
+def data_ingest():
     con = sqlite3.connect('ProjectData/gas_monitoring.db')
 
     cursor = con.cursor()
