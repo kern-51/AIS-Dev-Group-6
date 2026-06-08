@@ -12,6 +12,8 @@ def train_random_forest(df, target_column="Activity Level"):
     X = df.drop(columns=[target_column])
     y = df[target_column]
 
+    target_names = ['1.0', '2.0', '3.0']
+
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -29,8 +31,11 @@ def train_random_forest(df, target_column="Activity Level"):
 
     y_pred = model.predict(X_test)
 
-    accuracy = accuracy_score(y_test, y_pred)
+    print("Random Forest Classification Report for Test Set\n")
+    print(classification_report(y_test, y_pred, target_names=target_names), "\n")
 
-    report = classification_report(y_test, y_pred)
+    y_pred_train = model.predict(X_train)
+    print("Random Forest Classification Report for Train Set\n")
+    print(classification_report(y_train, y_pred_train, target_names=target_names))
 
-    return model, accuracy, report
+    return model

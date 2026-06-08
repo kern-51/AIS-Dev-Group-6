@@ -5,11 +5,6 @@ services:
     # Build the image using the Dockerfile in the current directory
     build: .
     container_name: ml_pipeline_container
-
+  # Ensures Python can find your 'src' folder regardless of which script is running
     environment:
       - PYTHONPATH=/app
-    # Ensures Python can find your 'src' folder regardless of which script is running
-
-    
-    # 'no' ensures the container stops after the run.sh script completes its work
-    # restart: "no"

@@ -107,7 +107,7 @@ def isolated_forest_eval(df, top_k=50):
      
     # 2. Evaluate Jaccard Similarity for Top-K Sets
     topk_scores = []
-    print("--- Top-K Jaccard Scores ---")
+    print("--- Isolated Forest Top-K Jaccard Scores ---")
     for (rs1, set1), (rs2, set2) in combinations(topk_sets.items(), 2):
         if len(set1 | set2) == 0:
             jaccard = 0.0
@@ -118,7 +118,7 @@ def isolated_forest_eval(df, top_k=50):
     
     # 3. Evaluate Jaccard Similarity for Flagged Sets (-1)
     flag_scores = []
-    print("\n--- Flagged Anomaly (-1) Jaccard Scores ---")
+    print("\n--- Isolated Forest Flagged Anomaly (-1) Jaccard Scores ---")
     for (rs1, set1), (rs2, set2) in combinations(anomaly_sets.items(), 2):
         if len(set1 | set2) == 0:
             jaccard = 0.0

@@ -22,8 +22,8 @@ echo "Step 4: Running Random Forest Model Training..."
 python src/random_forest.py
 
 # 5. Model Training
-echo "Step 5: Running Logistic Regression Model Training..."
-python src/logistic_regression.py
+echo "Step 5: Running Gradient Boosting Model Training..."
+python src/gradient_boosting.py
 
 # 6. Model Training
 echo "Step 6: Running Isolated Forest Model Training..."
