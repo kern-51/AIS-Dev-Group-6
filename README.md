@@ -11,8 +11,12 @@ isolated_forest.py - kern
 gradient_boosting.py - hongheng
 
 • Instructions on how to run the pipeline
+Git clone the files.
 • Instructions on how start your docker development environment (if any)
-
+Open wsl and docker desktop.
+Go to the directory where the files are at.
+Run docker compose up to star the environment
+Run docker compose down --rmi all to close everything.
 
 
 
