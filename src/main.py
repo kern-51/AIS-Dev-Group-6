@@ -9,7 +9,7 @@ def pipeline():
     df = data_clean(df)
     df = engineer_features(df)
     train_logistic_regression(df)
-    train_logistic_regression(df)
+    (df)
     isolated_forest(df, contamination=0.05, random_state=42)
 
 if __name__ == "__main__":
