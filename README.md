@@ -8,7 +8,7 @@ ingest.py - kern
 clean.py - kern
 feature_engineering.py - ivo
 isolated_forest.py - kern
-gradient_boosting.py - hongheng
+logistic_regression.py - hongheng
 
 • Instructions on how to run the pipeline
 • Instructions on how start your docker development environment (if any)

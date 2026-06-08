@@ -2,6 +2,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, accuracy_score
 def train_logistic_regression(df, target_column="Activity Level"):
+  """
+  Builds a logistic regression model using data from the pipeline, 
+  and returns the accuracy of the model on training and testing datasets.
+  """
   X = df.drop('Activity Level', axis=1) 
   y = df['Activity Level'] 
   #
