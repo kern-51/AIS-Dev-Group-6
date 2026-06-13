@@ -21,12 +21,16 @@ Instructions on how start your docker development environment (if any)
 
 
 
-
-
-
-
 Summary of key findings of EDA
-• The Exploratory Data Analysis (EDA) revealed several important patterns within the gas monitoring dataset. Environmental variables such as temperature, humidity, carbon dioxide (CO₂), and metal oxide sensor readings showed noticeable variation across different activity levels. Higher activity levels generally corresponded with increased gas concentration and environmental fluctuations, suggesting a relationship between human activity and sensor measurements. Correlation analysis also indicated that some sensor readings were related to one another, which provided opportunities for feature engineering. Overall, the EDA demonstrated that environmental sensor data contains meaningful information that can be used to classify activity levels and monitor environmental conditions effectively.
+Data Quality: 171 duplicate rows, dropped. Invalid values were transformed and dropped for others. Nulls values were imputed with mean using subgroups as well as KNN.
+
+Key Univariate: Metal Oxide sensors have centralised values but still contain fluctuations. MO3 has most stable fluctuations. 
+
+Key Relationships: Strong correlation (1000+ H statistic) between "Time of Day" and environmental sensor except CO2_ElectroChemical. Elderly seem to be not active overall but less in the evening when generally metal oxide and co2 is lower while carbon monoxide is higher. As CO rises, metal oxides and co2_electro lower and c02_infrared rise. Ventilation Only mode is related to high gas values, Off mode has signifficantly less co2 readings while  metal oxide is high.  Cooling Active suppresses most gas sensor readings.
+
+Main Insight: HVAC off suggests an empty room where it is not in use, hence the low co2 readings.
+
+Limitation: Vagueness in session id; if session id is allocated for each elderly/room, more insights can be made.
 
 Explain and justify features that are engineered
 • To improve model performance, several engineered features were created from the original sensor readings. These included average metal oxide readings and average CO₂ measurements obtained from multiple sensors. Aggregating values from multiple sensors helps reduce noise and provides a more stable representation of environmental conditions. Additional derived features were created to capture broader environmental patterns rather than relying on individual sensor values alone. These engineered features were expected to improve predictive performance by providing the machine learning models with more meaningful and representative inputs of the monitored environment.
@@ -37,3 +41,5 @@ Isolation Forest was chosen as an anomaly detection model to identify unusual en
 
 Explain any specific choice of metrics that are important to the problem statement
 • Accuracy was selected as the primary evaluation metric because the objective of the project is to correctly classify activity levels based on environmental sensor data. In addition, Precision, Recall, and F1-Score were used to provide a more comprehensive assessment of model performance. Precision measures how many predicted instances are actually correct, while Recall evaluates the model's ability to identify all relevant instances. F1-Score balances both Precision and Recall, making it useful when evaluating overall classification quality. Using multiple metrics ensures that the models are evaluated from different perspectives rather than relying solely on overall accuracy.
+• For the Isolatiion foresat, jacard similarity with top-k is used as a metric. Jaccard Similarity measures the overlap between sets of outliers by forests,checking for consistecy between model, ensuring stability. Top-K filter is to extract only the top outliers, seperating them as true anomalies from simple high values. The two metrics helps the classifier optimize for capturing the right mix of co-occurring sensor anomalies, rather than treating every single outlier as a completely independent, isolated variable.
+
