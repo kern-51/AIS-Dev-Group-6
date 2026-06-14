@@ -2,12 +2,14 @@ import pandas as pd
 
 def engineer_features(df):
     """
-    Clean the Activity level column to ensure it is ready for feature engineering. Ensure 
-    standardisation of inconsistent labels so that different class names arent treated
-    differently. Proceed to creating different data columns using existing ones. Remove session
-    ID, not useful as it is just an identifier and not good for predicting activity level. Summary is
-    that this file creates better feature inputs from the original sensor data so that the model
-    has more meaningful information to learn from.
+    Performs feature engineering on the cleaned gas monitoring dataset.
+    The function standardises Activity Level labels, creates new features
+    from existing sensor readings, and removes non-predictive identifiers.
+    Engineered features include average metal oxide readings, average CO2
+    levels, CO2 sensor differences, and an overall gas intensity score.
+    These features provide a more meaningful representation of environmental
+    conditions and are intended to improve the performance of downstream
+    machine learning models used for activity level prediction.
     """
     df = df.copy()
 
