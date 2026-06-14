@@ -4,10 +4,16 @@ from sklearn.metrics import accuracy_score, classification_report
 
 def train_random_forest(df, target_column="Activity Level"):
     """
-    Taken the ingested data from the pipeline, built a random forest model using data to predict
-    activity level.  Output is the evauluation such as the accuracy, recall, precision and F1 score.
-    This is done to see how well the model performs with the data. Summary is that it splits
-    the data, trains the model and predicts and evaluates the results.
+    Trains and evaluates a Random Forest classification model using the
+    processed gas monitoring dataset.
+    The model uses environmental sensor readings and engineered features
+    to predict Activity Level. The dataset is split into training and
+    testing sets, after which the Random Forest model is trained and used
+    to generate predictions.
+    Model performance is evaluated using a classification report that
+    includes Precision, Recall, and F1-Score for each activity level
+    class. These metrics help assess how effectively the model can
+    classify environmental activity levels.
     """
     X = df.drop(columns=[target_column])
     y = df[target_column]
