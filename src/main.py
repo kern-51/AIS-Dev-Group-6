@@ -25,7 +25,6 @@ def pipeline():
 
     train_random_forest(X_train, X_test, y_train, y_test, target_names, rf_config)
     train_gradient_boosting(X_train, X_test, y_train, y_test, target_names, gb_config)
-    anomaly_df = isolated_forest(df, if_config)
     isolated_forest_eval(df, if_config)
 
 if __name__ == "__main__":
