@@ -13,13 +13,18 @@ models:
     n_estimators: 100
     random_state: 42
   gradient_boosting:
-    n_estimators: 200
-    learning_rate: 0.1
-    random_state: 42
-  isolation_forest:
     n_estimators: 100
-    max_features:
-    max_samples:
-    contamination:
-    random_state: 42
+    learning_rate: 0.01
+    model_random_state: 42
+    resampling_random_state: 42
+  isolation_forest:
+    params:
+      n_estimators: 100
+      max_samples: "auto"
+      contamination: 0.05
+      random_state: 42
+    columns:
+      numeric: ['Temperature', 'Humidity', 'CO2_InfraredSensor', 'CO2_ElectroChemicalSensor', 'MetalOxideSensor_Unit1', 'MetalOxideSensor_Unit2', 'MetalOxideSensor_Unit3', 'MetalOxideSensor_Unit4', 'metal_oxide_avg', 'co2_avg', 'co2_sensor_difference', 'gas_intensity_score']
+      ordinal: ['Time of Day', 'Ambient Light Level', 'Activity Level']
+      nominal: ['HVAC Operation Mode']
   

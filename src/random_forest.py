@@ -1,7 +1,7 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 
-def train_random_forest(X_train, X_test, y_train, y_test, target_names):
+def train_random_forest(X_train, X_test, y_train, y_test, target_names, model_config: dict):
     """
     Trains and evaluates a Random Forest classification model using the
     processed gas monitoring dataset.
@@ -14,14 +14,17 @@ def train_random_forest(X_train, X_test, y_train, y_test, target_names):
     class. These metrics help assess how effectively the model can
     classify environmental activity levels.
     """
+    # Extract settings from the config
+    params = model_config
+    
     model = RandomForestClassifier(
-        n_estimators=100,
-        random_state=42
+        n_estimators=params['n_estimators'],
+        random_state=params['random_state']
     )
 
     model.fit(X_train, y_train)
-
     y_pred = model.predict(X_test)
+    
 
     print("Random Forest Classification Report for Test Set\n")
     print(classification_report(y_test, y_pred, target_names=target_names), "\n")
@@ -31,4 +34,3 @@ def train_random_forest(X_train, X_test, y_train, y_test, target_names):
     print(classification_report(y_train, y_pred_train, target_names=target_names))
 
     return model
-
