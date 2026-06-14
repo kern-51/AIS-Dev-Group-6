@@ -5,16 +5,23 @@ from src.random_forest import train_random_forest
 from src.gradient_boosting import train_gradient_boosting
 from src.isolated_forest import isolated_forest
 from src.isolated_forest import isolated_forest_eval
+from sklearn.model_selection import train_test_split
+import yaml
+
+
 def pipeline():
+    cfg = yaml.safe_load(open("config.yaml", "r")) 
     df = data_ingest()
     df = data_clean(df)
     df = engineer_features(df)
-    train_random_forest(df)
-    train_gradient_boosting(df)
+    X = df.drop('Activity Level', axis=1) 
+    y = df['Activity Level']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y)
+    target_names = ['1.0', '2.0', '3.0']
+    train_random_forest(X_train, X_test, y_train, y_test, target_names)
+    train_gradient_boosting(X_train, X_test, y_train, y_test, target_names)
     anomaly_df = isolated_forest(df, contamination=0.05, random_state=42)
-    isolated_forest_eval(df)
-
-    
+    isolated_forest_eval(X_train, X_test, y_train, y_test, target_names)
 
 if __name__ == "__main__":
     pipeline()

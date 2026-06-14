@@ -1,0 +1,25 @@
+# config.yaml
+
+database:
+  path: "data/gas_monitoring.db"
+  table_name: "gas_monitoring"
+
+pipeline:
+  test_size: 0.2
+  random_state: 42
+    
+models:
+  random_forest:
+    n_estimators: 100
+    random_state: 42
+  gradient_boosting:
+    n_estimators: 200
+    learning_rate: 0.1
+    random_state: 42
+  isolation_forest:
+    n_estimators: 100
+    max_features:
+    max_samples:
+    contamination:
+    random_state: 42
+  

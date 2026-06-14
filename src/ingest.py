@@ -4,7 +4,7 @@ def data_ingest():
     con = sqlite3.connect('ProjectData/gas_monitoring.db')
 
     cursor = con.cursor()
-    
+        
             # Query the sqlite_master table to get table names
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
             

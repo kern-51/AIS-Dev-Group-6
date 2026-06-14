@@ -1,23 +1,16 @@
 import pandas as pd
 from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score
 from imblearn.over_sampling import RandomOverSampler
-def train_gradient_boosting(df):
+def train_gradient_boosting(X_train, X_test, y_train, y_test, target_names):
   """
   Builds a gradient boosting model using data from the pipeline, 
   and returns the evaluation metrics the model on training and testing datasets.
   """
-  X = df.drop('Activity Level', axis=1) 
-  y = df['Activity Level']
-  #
-  # split data for training and testing
-  #
-  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y)
   rus = RandomOverSampler(random_state=42)
   X_resampled, y_resampled = rus.fit_resample(X_train, y_train)
 
-  target_names = ['1.0', '2.0', '3.0']
+
 
   model = GradientBoostingClassifier(n_estimators=100, learning_rate=0.01, random_state=42)
 
