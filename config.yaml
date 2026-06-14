@@ -25,6 +25,6 @@ models:
       random_state: 42
     columns:
       numeric: ['Temperature', 'Humidity', 'CO2_InfraredSensor', 'CO2_ElectroChemicalSensor', 'MetalOxideSensor_Unit1', 'MetalOxideSensor_Unit2', 'MetalOxideSensor_Unit3', 'MetalOxideSensor_Unit4', 'metal_oxide_avg', 'co2_avg', 'co2_sensor_difference', 'gas_intensity_score']
-      ordinal: ['Time of Day', 'Ambient Light Level', 'Activity Level']
-      nominal: ['HVAC Operation Mode']
+      ordinal: [ 'Ambient Light Level', 'Activity Level']
+      nominal: [ 'Time of Day', 'HVAC Operation Mode']
   
