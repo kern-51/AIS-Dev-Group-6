@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import IsolationForest
 
-\
+
 def isolated_forest(
     df, n_estimators=100, max_samples="auto", contamination=0.05, random_state=42, max_features=1.0
 ):
@@ -43,9 +43,9 @@ def isolated_forest(
     # Setup the preprocessing layers
     preprocessor = ColumnTransformer(
     transformers=[
-        ("num", StandardScaler(), numeric_cols),
-        ("ord", "passthrough", ordinal_cols),
-        ("nom", OneHotEncoder(handle_unknown="ignore"), nominal_cols),
+        ("num", StandardScaler(), numeric_cols), #scaling to prevent Feature Dominance
+        ("ord", StandardScaler(), ordinal_cols), #prevents the ordinal ranks from carrying unintended mathematical weight compared to the rest of the dataset (ie Feature Dominance)
+        ("nom", OneHotEncoder(handle_unknown="ignore"), nominal_cols), # no relations
     ]
     )
     # Define the full pipeline
