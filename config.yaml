@@ -21,10 +21,17 @@ models:
     params:
       n_estimators: 100
       max_samples: "auto"
+      max_features: 0.5
       contamination: 0.05
       random_state: 42
+
+      test_random_states: [0, 42, 123, 909]
+      n_estimators_list : [100, 200, 500]
+      test_max_samples  : ["auto", 0.5, 0.8, 1.0]
+      test_max_features : [0.5, 0.75, 1.0]
+      test_contamination: [0.01, 0.03, 0.05]
     columns:
       numeric: ['Temperature', 'Humidity', 'CO2_InfraredSensor', 'CO2_ElectroChemicalSensor', 'MetalOxideSensor_Unit1', 'MetalOxideSensor_Unit2', 'MetalOxideSensor_Unit3', 'MetalOxideSensor_Unit4', 'metal_oxide_avg', 'co2_avg', 'co2_sensor_difference', 'gas_intensity_score']
-      ordinal: [ 'Ambient Light Level', 'Activity Level']
-      nominal: [ 'Time of Day', 'HVAC Operation Mode']
+      ordinal: ['Time of Day', 'Ambient Light Level', 'Activity Level']
+      nominal: ['HVAC Operation Mode']
   
